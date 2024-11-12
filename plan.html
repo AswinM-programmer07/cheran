@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Plans</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Manage Plans</h2>
+    <form id="plan-form">
+        <input type="number" id="rfm" placeholder="RFM Value" required><br>
+        <input type="number" id="flexibility" placeholder="Flexibility/Error %" required><br>
+        <button onclick="window.location.href = "userDT"";>Add Plan</button>
+    </form>
+<a href="planPage.html">Next</a>
+
+    <div id="plans-list"></div>
+	<script>document.getElementById("customer-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const date = document.getElementById("date").value;
+    const phone = document.getElementById("phone").value;
+    const cost = document.getElementById("cost").value;
+
+    let customerData = {
+        name: name,
+        date: date,
+        phone: phone,
+        cost: cost,
+        rfmValue: calculateRFM(date, cost) // You can define a function to calculate RFM value here
+    };
+
+    // Store in LocalStorage
+    let customers = JSON.parse(localStorage.getItem("customers")) || [];
+    customers.push(customerData);
+    localStorage.setItem("customers", JSON.stringify(customers));
+
+    // Append to the table
+    let table = document.querySelector("#customer-table tbody");
+    let row = table.insertRow();
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${phone}</td>
+        <td>${date}</td>
+        <td>${cost}</td>
+        <td>${customerData.rfmValue}</td>
+    `;
+
+    // Clear form
+    document.getElementById("customer-form").reset();
+});
+
+// RFM Calculation Function
+function calculateRFM(date, cost) {
+    // Example: Calculate recency (number of days since purchase)
+    let purchaseDate = new Date(date);
+    let today = new Date();
+    let recency = Math.floor((today - purchaseDate) / (1000 * 3600 * 24));
+
+    return recency + cost; // Simplified RFM calculation for demo purposes
+}</script>
+    <script src="script.js"></script>
+</body>
+</html>

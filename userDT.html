@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+<title>GUNA</title>
+<link rel="stylesheet" link="styles.css">
+</head>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        canvas {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+<body>
+<h1>User Id</h1>
+<h2>Guna<h2>
+<p>ph.no: 9999993232</p>
+<p>Cost: 4000</p>
+<div><h1>Bar Graph Example</h1>
+
+    <!-- Create a canvas element to draw the chart -->
+    <canvas id="myChart" width="400" height="400"></canvas></div>
+<script>
+        // Setup the data for the bar chart
+        const data = {
+            labels: ['Recent', 'Frequent', 'Monitory Value'],  // X-axis labels
+            datasets: [{
+                label: 'Magnitude',
+                data: [25, 50, 75],  // Y-axis values for each category
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',  // Color for "Recent"
+                    'rgba(54, 162, 235, 0.2)',  // Color for "Frequent"
+                    'rgba(75, 192, 192, 0.2)'   // Color for "Monitory Value"
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',  // Border color for "Recent"
+                    'rgba(54, 162, 235, 1)',  // Border color for "Frequent"
+                    'rgba(75, 192, 192, 1)'   // Border color for "Monitory Value"
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration for the chart
+        const config = {
+            type: 'bar',  // Type of chart
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true  // Ensures the y-axis starts at zero
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false  // Hide the legend (optional)
+                    }
+                }
+            }
+        };
+
+        // Create the bar chart using Chart.js
+        const myChart = new Chart(
+            document.getElementById('myChart'), // The canvas element
+            config  // Chart configuration
+        );
+    </script>
+</body>
+</html>
